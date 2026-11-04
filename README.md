@@ -1,33 +1,31 @@
 # job-radar
 
-대기업·중견·강소·상장·공기업·외국계 채용 페이지에서 원하는 직무·경력의 공고를 모아 노션 DB에 넣는 Claude Code용 MCP 서버 + 스킬.
+취업 준비하면서 채용 사이트를 매일 하나씩 돌아보는 게 귀찮아서 만들었어요. 대기업, 중견, 강소, 공기업, 외국계 채용 페이지에서 내 직무와 연차에 맞는 공고만 모아 노션 DB에 넣어 주는 Claude Code 플러그인입니다.
 
-- MCP 서버(`server.py`): `companies.yaml`의 회사 채용 페이지에서 공고를 가져온다. 지원 출처: Greenhouse, 그리팅, 마이다스(recruiter.co.kr), 잡알리오(공공기관), 삼성·CJ·네이버·카카오·토스 채용 사이트. 마이다스·삼성·그리팅·Greenhouse는 공고 본문(자격 요건)도 API로 읽는다(`get_job_detail`).
-- 스킬(`skills/job-radar/SKILL.md`): 직무·경력 조건으로 거르고, 노션에 넣고, 중복·마감 공고를 정리한다.
-- 기업 리스트: 2026년 공정위 공시대상기업집단 102개 기준 + 중견·강소·공기업 (약 115곳).
+구성은 두 가지예요. MCP 서버(`server.py`)가 `companies.yaml`에 적힌 회사들의 채용 페이지에서 공고를 가져오고, 스킬(`skills/job-radar/SKILL.md`)이 그걸 직무·경력 조건으로 걸러서 노션에 넣어요. 이미 넣은 공고나 마감된 공고도 스킬이 정리해 줍니다.
+
+회사 목록은 2026년 공정위 공시대상기업집단 102개를 기준으로 중견·강소·공기업을 더해서 지금 115곳 정도예요. 공고는 Greenhouse, 그리팅, 마이다스(recruiter.co.kr), 잡알리오(공공기관), 그리고 삼성·CJ·네이버·카카오·토스 채용 사이트에서 가져와요. 마이다스, 삼성, 그리팅, Greenhouse는 공고 본문(자격 요건)까지 API로 읽어서(`get_job_detail`) 연차를 확인합니다.
 
 ## 설치
 
-필요한 것: [Claude Code](https://claude.com/claude-code), [uv](https://docs.astral.sh/uv/), 노션 계정.
+[Claude Code](https://claude.com/claude-code), [uv](https://docs.astral.sh/uv/), 노션 계정이 있어야 해요.
 
-**1. 플러그인 설치** (Claude Code 안에서)
+Claude Code 안에서 플러그인을 설치합니다.
 
 ```
 /plugin install job-radar --marketplace KIMDONGWOOK12/job-radar
 ```
 
-예전 버전 Claude Code라면 두 줄로:
+Claude Code 버전이 예전 거라 위 명령이 안 되면 두 줄로 나눠서 하면 돼요.
 
 ```
 /plugin marketplace add KIMDONGWOOK12/job-radar
 /plugin install job-radar@job-radar
 ```
 
-스킬과 MCP 서버가 같이 설치된다. 설치 후 Claude Code를 다시 연다.
+스킬이랑 MCP 서버가 같이 깔려요. 설치하고 나서 Claude Code를 한 번 껐다 켜 주세요.
 
-**2. 노션 연결** (둘 중 하나)
-- claude.ai 설정 → 커넥터에서 Notion 연결 (Claude Code에 같은 계정으로 로그인돼 있으면 그대로 쓰임)
-- 또는 터미널에서 `claude mcp add --transport http notion https://mcp.notion.com/mcp` 후 Claude Code에서 `/mcp`로 로그인
+그다음 노션을 연결합니다. claude.ai 설정의 커넥터에서 Notion을 켜 두면 같은 계정으로 로그인한 Claude Code에서도 그대로 쓸 수 있어요. 아니면 터미널에서 `claude mcp add --transport http notion https://mcp.notion.com/mcp`를 실행하고 Claude Code에서 `/mcp`로 로그인해도 됩니다.
 
 <details>
 <summary>플러그인 없이 직접 설치</summary>
@@ -42,26 +40,22 @@ ln -s "$(pwd)/skills/job-radar" ~/.claude/skills/job-radar
 
 ## 사용
 
-Claude Code에서 `/job-radar` (플러그인으로 설치했으면 `/job-radar:job-radar`, 또는 "채용 공고 업데이트해줘").
+Claude Code에서 `/job-radar`를 실행하거나 "채용 공고 업데이트해줘"라고 말하면 돼요. 플러그인으로 설치했다면 명령 이름은 `/job-radar:job-radar`예요.
 
-처음 실행하면 다음을 묻고 `~/.job-radar/profile.yaml`에 저장한 뒤 바로 수집한다.
-1. 원하는 직무 (자유롭게)
-2. 연차 (신입이면 0)
-3. 기업 분류 (대기업, 대기업 계열사, 중견기업, 강소·유망, 공기업, 외국계)
-4. 빼고 싶은 공고
-5. 공고를 넣을 노션 DB (없으면 새로 만듦)
+처음 실행할 때 몇 가지를 물어봐요. 원하는 직무(자유롭게 적으면 돼요), 연차(신입이면 0), 기업 분류(대기업, 대기업 계열사, 중견기업, 강소·유망, 공기업, 외국계 중 고르기), 빼고 싶은 공고, 그리고 공고를 넣을 노션 DB예요. 노션 DB가 없으면 새로 만들어 줘요. 답한 내용은 `~/.job-radar/profile.yaml`에 저장되고 바로 첫 수집을 시작합니다.
 
-검색 키워드는 직무 답을 보고 Claude가 만들어 확인받는다. 나중에 바꾸려면 "job-radar 설정 바꿔줘".
+검색 키워드는 직접 안 적어도 돼요. 직무 답을 보고 Claude가 만든 다음 맞는지 한 번 물어봐요. 나중에 조건을 바꾸고 싶으면 "job-radar 설정 바꿔줘"라고 하면 됩니다.
 
-## 기업 추가
+## 회사 추가
 
-`companies.yaml`에 한 줄 추가.
+`companies.yaml`에 한 줄 넣으면 돼요. 회사 채용 페이지가 어디 서비스를 쓰는지에 따라 적는 방법이 달라요.
+
 - 그리팅: `https://<회사>.career.greetinghr.com`이 열리면 `source: greeting, id: <회사>.career.greetinghr.com`
 - Greenhouse: `https://boards-api.greenhouse.io/v1/boards/<회사>/jobs`가 열리면 `source: greenhouse, id: <회사>`
 - 마이다스: `https://<회사>.recruiter.co.kr/career/home`이 열리면 `source: recruiter, id: <회사>.recruiter.co.kr`
-- 그 외: `source: custom, url: <채용 페이지>` (Claude가 직접 읽음)
+- 그 외: `source: custom, url: <채용 페이지>` (실행할 때 Claude가 페이지를 직접 읽어요)
 
-코드로 못 가져오는 곳: SK(skcareers.com), LG(careers.lg.com, 봇 차단), 현대자동차그룹(talent.hyundai.com, 대기열). 직접 확인.
+SK(skcareers.com), LG(careers.lg.com), 현대자동차그룹(talent.hyundai.com)은 코드로 못 가져와요. LG는 봇 차단이 있고 현대차는 접속 대기열이 걸려 있어서, 이 세 곳은 직접 들어가서 확인해야 해요.
 
 ## 라이선스
 
