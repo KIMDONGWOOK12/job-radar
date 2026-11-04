@@ -8,29 +8,23 @@
 
 ## 구조
 
-```mermaid
-flowchart LR
-    U(["사용자<br>/job-radar"]) --> S
+```
+job-radar/
+├── .claude-plugin/
+│   ├── plugin.json         플러그인 정보 (이름, 버전, 설명)
+│   └── marketplace.json    /plugin install로 설치할 수 있게 해 주는 목록
+├── .mcp.json               설치하면 MCP 서버를 자동으로 등록
+├── server.py               MCP 서버
+│   ├── search_jobs         회사들에서 공고를 모으고 키워드·연차로 1차 거르기
+│   ├── get_job_detail      공고 본문(자격 요건) 읽기
+│   ├── fetch_jobs          회사 하나의 공고 전체
+│   └── list_companies      수집 대상 회사 목록
+├── companies.yaml          수집할 회사 115곳 (이름, 분류, 채용 사이트)
+└── skills/
+    └── job-radar/
+        └── SKILL.md        설정 묻기 → 마감 공고 정리 → 수집 → 거르기 → 노션에 넣기
 
-    subgraph CC["Claude Code"]
-        S["스킬<br>SKILL.md"]
-        P[("profile.yaml<br>직무 · 연차 · 분류")]
-        S <--> P
-    end
-
-    subgraph MCP["job-radar MCP 서버 (server.py)"]
-        T1["search_jobs<br>공고 모으기 + 1차 거르기"]
-        T2["get_job_detail<br>공고 본문 읽기"]
-        C[("companies.yaml<br>회사 115곳")]
-        C --> T1
-    end
-
-    S --> T1
-    S --> T2
-    T1 --> A["Greenhouse · 그리팅 · 마이다스<br>잡알리오 · 삼성 · CJ<br>네이버 · 카카오 · 토스"]
-    T2 --> A
-    S -. "custom 회사는 WebFetch로 직접" .-> W["그룹 채용 사이트<br>(롯데, 한화 등)"]
-    S --> N["노션 MCP"] --> D[("노션 DB<br>채용 공고")]
+~/.job-radar/profile.yaml   내 직무·연차·기업 분류 (처음 실행할 때 만들어짐, 저장소에는 안 올라감)
 ```
 
 한 번 실행하면 이 순서로 돌아가요.
