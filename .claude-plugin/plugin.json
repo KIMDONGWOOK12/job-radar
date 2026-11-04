@@ -1,0 +1,9 @@
+{
+  "name": "job-radar",
+  "version": "0.1.0",
+  "description": "대기업·중견·강소·공기업 채용 공고를 직무·연차에 맞게 모아 노션 DB에 넣는 스킬 + MCP 서버",
+  "author": { "name": "KIMDONGWOOK12" },
+  "repository": "https://github.com/KIMDONGWOOK12/job-radar",
+  "license": "MIT",
+  "keywords": ["job-search", "notion", "mcp", "korea"]
+}

@@ -12,7 +12,7 @@ description: 기업 리스트(대기업·중견·강소·상장·공기업·외�
 - 노션 도구(예: `notion-search`, `notion-create-pages`)를 쓸 수 있는지 본다. 없으면 아래를 안내하고 끝낸다.
   - claude.ai 설정 → 커넥터에서 Notion 연결 (Claude Code에 같은 계정으로 로그인돼 있으면 자동으로 보임), 또는
   - `claude mcp add --transport http notion https://mcp.notion.com/mcp` 후 `/mcp`에서 로그인
-- `job-radar` 도구(`search_jobs`)가 없으면 README의 설치 명령(`claude mcp add job-radar ...`)을 안내하고 끝낸다.
+- `job-radar` 도구(`search_jobs`)가 없으면 플러그인 설치(`/plugin install job-radar --marketplace KIMDONGWOOK12/job-radar`) 후 Claude Code를 다시 열라고 안내하고 끝낸다.
 
 ## 1. 사용자 설정
 

@@ -10,24 +10,39 @@
 
 필요한 것: [Claude Code](https://claude.com/claude-code), [uv](https://docs.astral.sh/uv/), 노션 계정.
 
+**1. 플러그인 설치** (Claude Code 안에서)
+
+```
+/plugin install job-radar --marketplace KIMDONGWOOK12/job-radar
+```
+
+예전 버전 Claude Code라면 두 줄로:
+
+```
+/plugin marketplace add KIMDONGWOOK12/job-radar
+/plugin install job-radar@job-radar
+```
+
+스킬과 MCP 서버가 같이 설치된다. 설치 후 Claude Code를 다시 연다.
+
+**2. 노션 연결** (둘 중 하나)
+- claude.ai 설정 → 커넥터에서 Notion 연결 (Claude Code에 같은 계정으로 로그인돼 있으면 그대로 쓰임)
+- 또는 터미널에서 `claude mcp add --transport http notion https://mcp.notion.com/mcp` 후 Claude Code에서 `/mcp`로 로그인
+
+<details>
+<summary>플러그인 없이 직접 설치</summary>
+
 ```bash
-# 1. 받기
 git clone https://github.com/KIMDONGWOOK12/job-radar.git && cd job-radar
 uv sync
-
-# 2. MCP 서버와 스킬 등록
 claude mcp add job-radar -s user -- uv run --directory "$(pwd)" server.py
 ln -s "$(pwd)/skills/job-radar" ~/.claude/skills/job-radar
-
-# 3. 노션 연결 (둘 중 하나)
-#  - claude.ai 설정 → 커넥터에서 Notion 연결 (Claude Code에 같은 계정으로 로그인돼 있으면 그대로 쓰임)
-#  - 또는 노션 MCP 직접 추가 후 Claude Code에서 /mcp 로 로그인
-claude mcp add --transport http notion https://mcp.notion.com/mcp
 ```
+</details>
 
 ## 사용
 
-Claude Code에서 `/job-radar`.
+Claude Code에서 `/job-radar` (플러그인으로 설치했으면 `/job-radar:job-radar`, 또는 "채용 공고 업데이트해줘").
 
 처음 실행하면 다음을 묻고 `~/.job-radar/profile.yaml`에 저장한 뒤 바로 수집한다.
 1. 원하는 직무 (자유롭게)
