@@ -57,6 +57,11 @@ Claude Code에서 `/job-radar`를 실행하거나 "채용 공고 업데이트해
 
 SK(skcareers.com), LG(careers.lg.com), 현대자동차그룹(talent.hyundai.com)은 코드로 못 가져와요. LG는 봇 차단이 있고 현대차는 접속 대기열이 걸려 있어서, 이 세 곳은 직접 들어가서 확인해야 해요.
 
+## 만든 사람
+
+- [@KIMDONGWOOK12](https://github.com/KIMDONGWOOK12)
+- [@SWHee](https://github.com/SWHee)
+
 ## 라이선스
 
 MIT
