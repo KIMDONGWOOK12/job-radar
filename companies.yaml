@@ -1,0 +1,144 @@
+# 수집 대상 기업 리스트
+# source:
+#   greenhouse: id = boards-api.greenhouse.io 보드 이름
+#   greeting:   id = <회사>.career.greetinghr.com 호스트
+#   recruiter:  id = <회사>.recruiter.co.kr 호스트 (마이다스 인재경영)
+#   naver | kakao | toss | samsung | cj: 회사 전용 수집기
+#   alio:       잡알리오 공공기관 채용. keywords로 본문 검색
+#   custom:     코드 수집 없음. url을 Claude가 직접 읽음
+# category: 대기업 | 대기업 계열사 | 중견기업 | 강소·유망 | 공기업 | 외국계
+# 기준: 2026년 공정위 공시대상기업집단 102개 (2026-05-01 지정) + 중견·강소·공기업
+# 코드로 못 가져오는 곳 (직접 확인): SK(skcareers.com), LG(careers.lg.com), 현대자동차그룹(talent.hyundai.com)
+# 채용 페이지를 아직 못 찾은 집단: 포스코, 영풍, 미래에셋, 효성, 하림, 부영, 장금상선, 호반, HDC, SM, 코오롱(그룹),
+#   넥슨, 교보생명보험, 한국지엠, 소노인터내셔널, 대방건설, 금호석유화학, 태영, 삼천리, HL, LIG, 아모레퍼시픽,
+#   엠디엠, 글로벌세아, 대신, 삼양, 중앙, 고려에이치씨, 반도홀딩스, OK금융, 대광, DN, 사조, 파라다이스, 하이트진로,
+#   대명화학, 한솔, 신영, 유코카캐리어스, 희성, QCP, 일진글로벌, HMM, 중흥건설, 한국교직원공제회
+# 제외: 웅진(교육 회사)
+
+companies:
+  # ---------- 대기업 ----------
+  - {name: 삼성, category: 대기업, source: samsung}
+  - {name: CJ, category: 대기업, source: cj}
+  - {name: 네이버, category: 대기업, source: naver}
+  - {name: 카카오, category: 대기업, source: kakao}
+  - {name: 토스, category: 대기업, source: toss}
+  - {name: 크래프톤, category: 대기업, source: greenhouse, id: krafton}
+  - {name: 쿠팡, category: 대기업, source: greenhouse, id: coupang}
+  - {name: 무신사, category: 대기업, source: greeting, id: musinsa.career.greetinghr.com}
+  - {name: KT, category: 대기업, source: recruiter, id: kt.recruiter.co.kr}
+  - {name: 셀트리온, category: 대기업, source: recruiter, id: celltrion.recruiter.co.kr}
+  - {name: 롯데, category: 대기업, source: custom, url: "https://recruit.lotte.co.kr"}
+  - {name: HD현대, category: 대기업, source: recruiter, id: hd.recruiter.co.kr}
+  - {name: DB, category: 대기업, source: recruiter, id: dbgroup.recruiter.co.kr}
+  - {name: LX, category: 대기업, source: recruiter, id: lx.recruiter.co.kr}
+  - {name: 한진, category: 대기업, source: recruiter, id: hanjingroup.recruiter.co.kr}
+  - {name: 에쓰오일, category: 대기업, source: recruiter, id: s-oil.recruiter.co.kr}
+  - {name: KT&G, category: 대기업, source: recruiter, id: ktng.recruiter.co.kr}
+  - {name: 한국항공우주산업, category: 대기업, source: recruiter, id: koreaaero.recruiter.co.kr}
+  - {name: 현대해상, category: 대기업, source: recruiter, id: hi.recruiter.co.kr}
+  - {name: 태광, category: 대기업, source: recruiter, id: taekwang.recruiter.co.kr}
+  - {name: 유진, category: 대기업, source: recruiter, id: eugene.recruiter.co.kr}
+  - {name: 세아, category: 대기업, source: recruiter, id: seah.recruiter.co.kr}
+  - {name: 에코프로, category: 대기업, source: recruiter, id: ecoprogroup.recruiter.co.kr}
+  - {name: BNK, category: 대기업, source: recruiter, id: bnkfg.recruiter.co.kr}
+  - {name: BGF, category: 대기업, source: recruiter, id: bgf.recruiter.co.kr}
+  - {name: 원익, category: 대기업, source: recruiter, id: wonik.recruiter.co.kr}
+  - {name: OCI, category: 대기업, source: greeting, id: oci.career.greetinghr.com}
+  - {name: 동국제강, category: 대기업, source: greeting, id: dongkuk.career.greetinghr.com}
+  - {name: 하이브, category: 대기업, source: greeting, id: hybe.career.greetinghr.com}
+  - {name: 빗썸, category: 대기업, source: greeting, id: bithumbcorp.career.greetinghr.com}
+  - {name: 삼표, category: 대기업, source: greeting, id: sampyo.career.greetinghr.com}
+  - {name: 한국콜마, category: 대기업, source: recruiter, id: kolmar.recruiter.co.kr}
+  - {name: 오리온, category: 대기업, source: recruiter, id: orion.recruiter.co.kr}
+  - {name: 한화, category: 대기업, source: custom, url: "https://www.hanwhain.com"}
+  - {name: 신세계, category: 대기업, source: custom, url: "https://job.shinsegae.com"}
+  - {name: 두산, category: 대기업, source: custom, url: "https://career.doosan.com"}
+  - {name: 현대백화점, category: 대기업, source: custom, url: "https://recruit.ehyundai.com"}
+  - {name: 농협, category: 대기업, source: custom, url: "https://www.nonghyup.com/recruit"}
+  - {name: 넷마블, category: 대기업, source: custom, url: "https://career.netmarble.com"}
+  - {name: 이랜드, category: 대기업, source: custom, url: "https://careers.eland.co.kr"}
+  - {name: 동원, category: 대기업, source: custom, url: "https://recruit.dongwon.com"}
+  - {name: 라인, category: 대기업, source: custom, url: "https://careers.linecorp.com/ko"}
+  - {name: 농심, category: 대기업, source: custom, url: "https://recruit.nongshim.com"}
+
+  # ---------- 대기업 계열사 ----------
+  - {name: 카카오페이, category: 대기업 계열사, source: greeting, id: kakaopay.career.greetinghr.com}
+  - {name: 카카오모빌리티, category: 대기업 계열사, source: greeting, id: kakaomobility.career.greetinghr.com}
+  - {name: 카카오엔터프라이즈, category: 대기업 계열사, source: greeting, id: kakaoenterprise.career.greetinghr.com}
+  - {name: SK쉴더스, category: 대기업 계열사, source: greeting, id: skshieldus.career.greetinghr.com}
+  - {name: 한화오션, category: 대기업 계열사, source: greeting, id: hanwhaocean.career.greetinghr.com}
+  - {name: 롯데백화점, category: 대기업 계열사, source: greeting, id: lotteshopping.career.greetinghr.com}
+  - {name: W컨셉, category: 대기업 계열사, source: greeting, id: wconcept.career.greetinghr.com}
+  - {name: KB증권, category: 대기업 계열사, source: greeting, id: kbsec.career.greetinghr.com}
+  - {name: NICE그룹, category: 대기업 계열사, source: greeting, id: nice.career.greetinghr.com}
+  - {name: KT DS, category: 대기업 계열사, source: recruiter, id: ktds.recruiter.co.kr}
+  - {name: 케이뱅크, category: 대기업 계열사, source: recruiter, id: kbank.recruiter.co.kr}
+  - {name: 현대모비스, category: 대기업 계열사, source: recruiter, id: mobis.recruiter.co.kr}
+  - {name: 현대글로비스, category: 대기업 계열사, source: recruiter, id: glovis.recruiter.co.kr}
+  - {name: GS리테일, category: 대기업 계열사, source: recruiter, id: gsretail.recruiter.co.kr}
+  - {name: GS건설, category: 대기업 계열사, source: recruiter, id: gsenc.recruiter.co.kr}
+  - {name: 한국타이어, category: 대기업 계열사, source: recruiter, id: hankooktire.recruiter.co.kr}
+  - {name: LS ELECTRIC, category: 대기업 계열사, source: recruiter, id: lselectric.recruiter.co.kr}
+  - {name: LS ITC, category: 대기업 계열사, source: recruiter, id: lsitc.recruiter.co.kr}
+  - {name: LS엠트론, category: 대기업 계열사, source: recruiter, id: lsmtron.recruiter.co.kr}
+  - {name: 신한금융그룹, category: 대기업 계열사, source: recruiter, id: shinhan.recruiter.co.kr}
+  - {name: 하나은행, category: 대기업 계열사, source: recruiter, id: hanabank.recruiter.co.kr}
+  - {name: 신세계I&C, category: 대기업 계열사, source: recruiter, id: shinsegaeinc.recruiter.co.kr}
+  - {name: 대한항공, category: 대기업 계열사, source: recruiter, id: koreanair.recruiter.co.kr}
+  - {name: NH투자증권, category: 대기업 계열사, source: recruiter, id: nhqv.recruiter.co.kr}
+  - {name: DL이앤씨, category: 대기업 계열사, source: recruiter, id: dlenc.recruiter.co.kr}
+  - {name: GS에너지, category: 대기업 계열사, source: recruiter, id: gsenergy.recruiter.co.kr}
+  - {name: E1, category: 대기업 계열사, source: recruiter, id: e1.recruiter.co.kr}
+  - {name: 셀트리온제약, category: 대기업 계열사, source: recruiter, id: celltrionph.recruiter.co.kr}
+  - {name: KG모빌리티, category: 대기업 계열사, source: recruiter, id: kgm.recruiter.co.kr}
+  - {name: 세아제강, category: 대기업 계열사, source: recruiter, id: seahsteel.recruiter.co.kr}
+  - {name: 부산은행, category: 대기업 계열사, source: recruiter, id: busanbank.recruiter.co.kr}
+  - {name: 경남은행, category: 대기업 계열사, source: recruiter, id: knbank.recruiter.co.kr}
+  - {name: BNK캐피탈, category: 대기업 계열사, source: recruiter, id: bnkcapital.recruiter.co.kr}
+  - {name: 제주항공, category: 대기업 계열사, source: recruiter, id: jejuair.recruiter.co.kr}
+  - {name: AK플라자, category: 대기업 계열사, source: recruiter, id: akplaza.recruiter.co.kr}
+  - {name: 다우데이타, category: 대기업 계열사, source: greeting, id: daoudata.career.greetinghr.com}
+  - {name: 코오롱베니트, category: 대기업 계열사, source: greeting, id: kolonbenit.career.greetinghr.com}
+  - {name: KCC글라스, category: 대기업 계열사, source: greeting, id: kccglass.career.greetinghr.com}
+  - {name: 람다256 (두나무), category: 대기업 계열사, source: greeting, id: lambda256.career.greetinghr.com}
+  - {name: 아이에스동서, category: 대기업 계열사, source: greeting, id: isdongseo.career.greetinghr.com}
+  - {name: 이랜드이츠, category: 대기업 계열사, source: greeting, id: elandeats.career.greetinghr.com}
+  - {name: 동국시스템즈, category: 대기업 계열사, source: greeting, id: dongkuksystems.career.greetinghr.com}
+
+  # ---------- 중견기업 ----------
+  - {name: 안랩, category: 중견기업, source: recruiter, id: ahnlab.recruiter.co.kr}
+  - {name: 컴투스, category: 중견기업, source: recruiter, id: com2us.recruiter.co.kr}
+  - {name: 웹젠, category: 중견기업, source: recruiter, id: webzen.recruiter.co.kr}
+  - {name: 대웅, category: 중견기업, source: recruiter, id: daewoong.recruiter.co.kr}
+  - {name: 유한양행, category: 중견기업, source: recruiter, id: yuhan.recruiter.co.kr}
+  - {name: 한미약품, category: 중견기업, source: recruiter, id: hanmi.recruiter.co.kr}
+  - {name: 코스맥스, category: 중견기업, source: recruiter, id: cosmax.recruiter.co.kr}
+  - {name: F&F, category: 중견기업, source: recruiter, id: fnf.recruiter.co.kr}
+  - {name: 한컴, category: 중견기업, source: greeting, id: hancom.career.greetinghr.com}
+  - {name: GS ITM, category: 중견기업, source: greeting, id: gsitm.career.greetinghr.com}
+  - {name: 풀무원, category: 중견기업, source: greeting, id: pulmuone.career.greetinghr.com}
+
+  # ---------- 외국계 ----------
+  - {name: 몰로코, category: 외국계, source: greenhouse, id: moloco}
+
+  # ---------- 강소 · 유망 ----------
+  - {name: 당근, category: 강소·유망, source: greenhouse, id: daangn}
+  - {name: 퓨리오사AI, category: 강소·유망, source: greenhouse, id: furiosaai}
+  - {name: 컬리, category: 강소·유망, source: greeting, id: kurly.career.greetinghr.com}
+  - {name: 마이리얼트립, category: 강소·유망, source: greeting, id: myrealtrip.career.greetinghr.com}
+  - {name: 업스테이지, category: 강소·유망, source: greeting, id: upstage.career.greetinghr.com}
+  - {name: 마키나락스, category: 강소·유망, source: greeting, id: makinarocks.career.greetinghr.com}
+  - {name: 크라우드웍스, category: 강소·유망, source: greeting, id: crowdworks.career.greetinghr.com}
+  - {name: 올거나이즈, category: 강소·유망, source: greeting, id: allganize.career.greetinghr.com}
+  - {name: 플리토, category: 강소·유망, source: greeting, id: flitto.career.greetinghr.com}
+  - {name: 모레, category: 강소·유망, source: greeting, id: moreh.career.greetinghr.com}
+  - {name: 캐치테이블, category: 강소·유망, source: greeting, id: catchtable.career.greetinghr.com}
+  - {name: 뤼튼, category: 강소·유망, source: greeting, id: wrtn.career.greetinghr.com}
+  - {name: 스캐터랩, category: 강소·유망, source: greeting, id: scatterlab.career.greetinghr.com}
+  - {name: 리벨리온, category: 강소·유망, source: greeting, id: rebellions.career.greetinghr.com}
+  - {name: 딥엑스, category: 강소·유망, source: greeting, id: deepx.career.greetinghr.com}
+  - {name: 스트라드비젼, category: 강소·유망, source: greeting, id: stradvision.career.greetinghr.com}
+  - {name: 딥노이드, category: 강소·유망, source: greeting, id: deepnoid.career.greetinghr.com}
+
+  # ---------- 공기업 · 공공기관 ----------
+  - {name: 잡알리오, category: 공기업, source: alio, keywords: [AI, 인공지능, 데이터, 빅데이터]}
