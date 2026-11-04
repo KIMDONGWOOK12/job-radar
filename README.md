@@ -6,6 +6,41 @@
 
 회사 목록은 2026년 공정위 공시대상기업집단 102개를 기준으로 중견·강소·공기업을 더해서 지금 115곳 정도예요. 공고는 Greenhouse, 그리팅, 마이다스(recruiter.co.kr), 잡알리오(공공기관), 그리고 삼성·CJ·네이버·카카오·토스 채용 사이트에서 가져와요. 마이다스, 삼성, 그리팅, Greenhouse는 공고 본문(자격 요건)까지 API로 읽어서(`get_job_detail`) 연차를 확인합니다.
 
+## 구조
+
+```mermaid
+flowchart LR
+    U(["사용자<br>/job-radar"]) --> S
+
+    subgraph CC["Claude Code"]
+        S["스킬<br>SKILL.md"]
+        P[("profile.yaml<br>직무 · 연차 · 분류")]
+        S <--> P
+    end
+
+    subgraph MCP["job-radar MCP 서버 (server.py)"]
+        T1["search_jobs<br>공고 모으기 + 1차 거르기"]
+        T2["get_job_detail<br>공고 본문 읽기"]
+        C[("companies.yaml<br>회사 115곳")]
+        C --> T1
+    end
+
+    S --> T1
+    S --> T2
+    T1 --> A["Greenhouse · 그리팅 · 마이다스<br>잡알리오 · 삼성 · CJ<br>네이버 · 카카오 · 토스"]
+    T2 --> A
+    S -. "custom 회사는 WebFetch로 직접" .-> W["그룹 채용 사이트<br>(롯데, 한화 등)"]
+    S --> N["노션 MCP"] --> D[("노션 DB<br>채용 공고")]
+```
+
+한 번 실행하면 이 순서로 돌아가요.
+
+1. 스킬이 `profile.yaml`에서 내 직무, 연차, 기업 분류를 읽어요. 파일이 없으면 먼저 물어보고 만들어요.
+2. 노션 DB에서 마감일이 지난 공고를 지워요.
+3. `search_jobs`가 `companies.yaml`의 회사들에서 공고를 한꺼번에 모은 뒤, 제목 키워드와 연차로 1차로 걸러요.
+4. 연차가 안 적힌 공고는 `get_job_detail`로 본문을 읽고 자격 요건을 확인해요. 직무가 맞는지는 Claude가 판단해요.
+5. 노션에 이미 있는 공고는 건너뛰고 새 공고만 넣은 다음, 몇 건 넣었는지 알려 줘요.
+
 ## 설치
 
 [Claude Code](https://claude.com/claude-code), [uv](https://docs.astral.sh/uv/), 노션 계정이 있어야 해요.
